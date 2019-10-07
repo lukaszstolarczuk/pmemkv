@@ -67,6 +67,7 @@ RUN dnf update -y \
 	sudo \
 	tbb-devel \
 	unzip \
+	valgrind-devel \
 	wget \
 	which \
 && dnf clean all
@@ -77,10 +78,6 @@ RUN dnf debuginfo-install -y glibc
 # Install Googletest
 COPY install-googletest.sh install-googletest.sh
 RUN ./install-googletest.sh
-
-# Install valgrind
-COPY install-valgrind.sh install-valgrind.sh
-RUN ./install-valgrind.sh
 
 # Install pmdk
 COPY install-pmdk.sh install-pmdk.sh

@@ -117,6 +117,8 @@ echo "##############################################################"
 mkdir $WORKDIR/build
 cd $WORKDIR/build
 
+echo "Valgrind without pmemcheck!!!"
+
 PKG_CONFIG_PATH=$MEMKIND_DEFAULT_PKG_CONFIG_PATH:$PKG_CONFIG_PATH \
 cmake .. -DCMAKE_BUILD_TYPE=Debug \
 	-DTEST_DIR=/dev/shm \
@@ -124,9 +126,33 @@ cmake .. -DCMAKE_BUILD_TYPE=Debug \
 	-DCOVERAGE=$COVERAGE \
 	-DDEVELOPER_MODE=1
 
+echo "Valgrind without pmemcheck!!!"
 make -j$(nproc)
 make doc
 ctest --output-on-failure
+
+cd $WORKDIR
+rm -rf build
+mkdir build
+cd build
+
+sudo_password -S dnf remove valgrind-devel -y 2>/dev/null || true
+sudo_password -S apt remove valgrind-dbg valgrind -y 2>/dev/null || true
+
+echo "No VALGRIND at alll!!!"
+
+PKG_CONFIG_PATH=$MEMKIND_DEFAULT_PKG_CONFIG_PATH:$PKG_CONFIG_PATH \
+cmake .. -DCMAKE_BUILD_TYPE=Debug \
+	-DTEST_DIR=/dev/shm \
+	-DCMAKE_INSTALL_PREFIX=$PREFIX \
+	-DCOVERAGE=$COVERAGE \
+	-DDEVELOPER_MODE=1
+
+echo "No VALGRIND at alll!!!"
+make -j$(nproc)
+make doc
+ctest --output-on-failure
+
 sudo_password -S make install
 
 if [ "$COVERAGE" == "1" ]; then
