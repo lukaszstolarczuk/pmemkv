@@ -10,7 +10,7 @@ services:
 env:
   global:
     - GITHUB_REPO=pmem/pmemkv
-    - DOCKERHUB_REPO=pmem/pmemkv
+    - DOCKERHUB_REPO=lukaszstolarczuk/pmemkv
   matrix:
     - TYPE=normal OS=fedora OS_VER=31
     - TYPE=normal OS=ubuntu OS_VER=19.10
@@ -32,4 +32,4 @@ script:
 
 after_success:
   - source ./set-vars.sh
-  - if [[ -f $CI_FILE_PUSH_IMAGE_TO_REPO ]]; then images/push-image.sh $OS-$OS_VER; fi
+  - if [[ -f $XXX_DISABLE_CI_FILE_PUSH_IMAGE_TO_REPO ]]; then images/push-image.sh $OS-$OS_VER; fi

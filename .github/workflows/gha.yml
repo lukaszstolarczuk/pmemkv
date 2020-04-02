@@ -13,13 +13,17 @@ on: [push, pull_request]
 env:
     REPO:           pmemkv
     GITHUB_REPO:    pmem/pmemkv
-    DOCKERHUB_REPO: pmem/pmemkv
+    DOCKERHUB_REPO: lukaszstolarczuk/pmemkv
+
 
 jobs:
   linux:
     name: pmemkv
     runs-on: ubuntu-latest
     env:
+      DOCKERHUB_USER:          lukaszstolarczuk
+      DOCKERHUB_PASSWORD:      ${{ secrets.DOCKERHUB_PASSWORD }}
+      DOC_UPDATE_GITHUB_TOKEN: ${{ secrets.DOC_UPDATE_GITHUB_TOKEN }}
       HOST_WORKDIR:   /home/runner/work/pmemkv/pmemkv
       WORKDIR:        utils/docker
     strategy:
@@ -36,9 +40,6 @@ jobs:
        - name: Clone the git repo
          uses: actions/checkout@v2
 
-       - name: Change ownership of the repo
-         run: sudo chown -R 1000.1000 $HOST_WORKDIR
-
        - name: Pull or rebuild the image
          run: cd $WORKDIR && ${{ matrix.CONFIG }} ./pull-or-rebuild-image.sh
 
@@ -46,4 +47,4 @@ jobs:
          run: cd $WORKDIR && ${{ matrix.CONFIG }} ./build.sh
 
        - name: Push the image
-         run: cd $WORKDIR && source ./set-vars.sh && ${{ matrix.CONFIG }} /bin/bash -c "if [[ -f XXX_DISABLE_${CI_FILE_PUSH_IMAGE_TO_REPO} ]]; then images/push-image.sh $OS-$OS_VER; fi"
+         run: cd $WORKDIR && source ./set-vars.sh && ${{ matrix.CONFIG }} /bin/bash -c "if [[ -f ${CI_FILE_PUSH_IMAGE_TO_REPO} ]]; then images/push-image.sh $OS-$OS_VER; fi"
