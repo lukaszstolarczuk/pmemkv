@@ -244,6 +244,13 @@ echo "---------------------------- Error expected! -----------------------------
 compile_example_standalone pmemkv_basic_cpp && exit 1
 echo "---------------------------------------------------------------------------"
 
+echo "------------------------------ terminfo -----------------------------------"
+ls ${HOME}/.terminfo/ -R || true
+ls /etc/terminfo/ -R || true
+ls /lib/terminfo/ -R || true
+ls /usr/share/terminfo -R || true
+echo "---------------------------------------------------------------------------"
+
 # Run build steps passed as script arguments
 build_steps=$@
 if [[ -z "$build_steps" ]]; then
