@@ -61,6 +61,7 @@ RUN dnf update -y \
 	pandoc \
 	passwd \
 	perl-Text-Diff \
+	rapidjson-devel \
 	rpm-build \
 	sudo \
 	tbb-devel \
@@ -73,8 +74,8 @@ RUN dnf update -y \
 RUN dnf debuginfo-install -y glibc
 
 # Install rapidjson from sources
-COPY install-rapidjson.sh install-rapidjson.sh
-RUN ./install-rapidjson.sh
+# COPY install-rapidjson.sh install-rapidjson.sh
+# RUN ./install-rapidjson.sh
 
 # Install valgrind
 COPY install-valgrind.sh install-valgrind.sh
