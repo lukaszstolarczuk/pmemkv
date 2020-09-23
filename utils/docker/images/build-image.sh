@@ -7,7 +7,6 @@
 #                           environment for testing pmemkv, according
 #                           to the Dockerfile.<OS-VER> file located
 #                           in the same directory.
-#
 # The script can be run locally.
 #
 
