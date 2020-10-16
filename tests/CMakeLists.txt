@@ -371,7 +371,65 @@ if(ENGINE_CMAP)
 	add_engine_test(ENGINE cmap
 			BINARY pmemobj_put_get_std_map_reserve
 			TRACERS none memcheck pmemcheck
-			SCRIPT pmemobj_based/default.cmake)
+			SCRIPT pmemobj_based/default.cmake
+			PARAMS 0 500000
+			DB_SIZE 500M)
+
+	add_engine_test(ENGINE cmap
+			BINARY pmemobj_put_get_std_map_reserve
+			TRACERS none memcheck pmemcheck
+			SCRIPT pmemobj_based/default.cmake
+			PARAMS 250000 500000
+			DB_SIZE 500M)
+
+	add_engine_test(ENGINE cmap
+			BINARY pmemobj_put_get_std_map_reserve
+			TRACERS none memcheck pmemcheck
+			SCRIPT pmemobj_based/default.cmake
+			PARAMS 500000 500000
+			DB_SIZE 500M)
+
+	add_engine_test(ENGINE cmap
+			BINARY pmemobj_put_get_std_map_reserve
+			TRACERS none memcheck pmemcheck
+			SCRIPT pmemobj_based/default.cmake
+			PARAMS 0 1000000
+			DB_SIZE 500M)
+
+	add_engine_test(ENGINE cmap
+			BINARY pmemobj_put_get_std_map_reserve
+			TRACERS none memcheck pmemcheck
+			SCRIPT pmemobj_based/default.cmake
+			PARAMS 500000 1000000
+			DB_SIZE 500M)
+
+	add_engine_test(ENGINE cmap
+			BINARY pmemobj_put_get_std_map_reserve
+			TRACERS none memcheck pmemcheck
+			SCRIPT pmemobj_based/default.cmake
+			PARAMS 1000000 1000000
+			DB_SIZE 500M)
+
+	add_engine_test(ENGINE cmap
+			BINARY pmemobj_put_get_std_map_reserve
+			TRACERS none memcheck pmemcheck
+			SCRIPT pmemobj_based/default.cmake
+			PARAMS 0 10000000
+			DB_SIZE 2G)
+
+	add_engine_test(ENGINE cmap
+			BINARY pmemobj_put_get_std_map_reserve
+			TRACERS none memcheck pmemcheck
+			SCRIPT pmemobj_based/default.cmake
+			PARAMS 5000000 10000000
+			DB_SIZE 2G)
+
+	add_engine_test(ENGINE cmap
+			BINARY pmemobj_put_get_std_map_reserve
+			TRACERS none memcheck pmemcheck
+			SCRIPT pmemobj_based/default.cmake
+			PARAMS 10000000 10000000
+			DB_SIZE 2G)
 
 	add_engine_test(ENGINE cmap
 			BINARY pmemobj_error_handling_reserve
