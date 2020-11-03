@@ -16,8 +16,8 @@ fi
 PACKAGE_TYPE=$1
 PREFIX=${2:-/usr}
 
-# common: 1.9, 03.07.2020
-PMDK_VERSION="1.9"
+# common: 1.10, 28.10.2020
+PMDK_VERSION="1.10"
 
 git clone https://github.com/pmem/pmdk
 cd pmdk
