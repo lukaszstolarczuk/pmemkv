@@ -13,7 +13,7 @@ OS=$1
 echo "==== clone ndctl repo ===="
 git clone https://github.com/pmem/ndctl.git
 cd ndctl
-git checkout v69
+git checkout v70
 
 if [ "$OS" = "fedora" ]; then
 	echo "==== setup rpmbuild tree ===="
