@@ -11,7 +11,7 @@ set -e
 OS=$1
 
 echo "==== clone ndctl repo ===="
-git clone https://github.com/pmem/ndctl.git
+git clone https://github.com/pmem/ndctl
 cd ndctl
 git checkout v69
 
