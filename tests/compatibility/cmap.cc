@@ -7,15 +7,16 @@
 
 #include <cstdlib>
 
-const uint64_t SIZE = 1024UL * 1024UL * 1024UL;
-const uint64_t NUM_ELEMENTS = 1024UL * 1024UL;
+const uint64_t SIZE = 1024UL * 1 * 1024UL;
+const uint64_t NUM_ELEMENTS = 1 * 1024UL;
 
 pmem::kv::db *db_create(std::string path)
 {
 	pmem::kv::config cfg;
 
 	pmem::kv::status s = cfg.put_string("path", path);
-	assert(s == pmem::kv::status::OK);
+	// assert(s == pmem::kv::status::OK);
+	assert(("Blargha", s == pmem::kv::status::OK));
 	s = cfg.put_uint64("size", SIZE);
 	assert(s == pmem::kv::status::OK);
 	s = cfg.put_uint64("error_if_exists", 1);
@@ -28,7 +29,7 @@ pmem::kv::db *db_create(std::string path)
 
 	pmem::kv::db *kv = new pmem::kv::db;
 	s = kv->open("cmap", std::move(cfg));
-	assert(s == pmem::kv::status::OK);
+	assert(("Bujaka", s == pmem::kv::status::OK));
 
 	return kv;
 }

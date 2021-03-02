@@ -118,6 +118,14 @@ Every engine has documented all supported config parameters (please see **libpme
 	If true: pmemkv creates the file, unless it exists - than it fails.
 	False by default.
 
+`int pmemkv_config_put_create_if_missing(pmemkv_config *config, bool value)`
+
+:	XXX
+	Puts error_if_exists parameter to a config. For engines supporting this flag:
+	If false: .
+	If true: .
+	XXX False by default.
+
 `int pmemkv_config_put_comparator(pmemkv_config *config, pmemkv_comparator *comparator);`
 
 :	Puts comparator object to a config. To create an instance of pmemkv_comparator object,

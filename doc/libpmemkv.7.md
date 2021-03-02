@@ -71,6 +71,9 @@ This engine requires the following config parameters (see **libpmemkv_config**(3
 	if 1, pmemkv creates the file (but it will fail if path exists).
 	+ type: uint64_t
 	+ default value: 0
+* **create_if_missing** -- XXX
+	+ type: uint64_t
+	+ default value: 0
 * **size** --  Only needed when error_if_exists is not 0, specifies size of the database [in bytes] to create.
 	+ type: uint64_t
 	+ min value: 8388608 (8MB)
