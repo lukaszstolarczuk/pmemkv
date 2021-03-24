@@ -51,13 +51,16 @@ public:
 			cfg_by_path = true;
 
 			auto is_size = cfg->get_uint64("size", &size);
-			cfg->get_uint64("create_if_missing", &create_if_missing);
-			if (!cfg->get_uint64("create_or_error_if_exists",
-					     &create_or_error_if_exists)) {
+			auto is_cim = cfg->get_uint64("create_if_missing", &create_if_missing);
+			auto is_coeie = cfg->get_uint64("create_or_error_if_exists", &create_or_error_if_exists)
+			if (!is_coeie) {
 				/* 'force_create' is here for compatibility with bindings,
 				 * which may still use this flag in their API */
-				cfg->get_uint64("force_create",
-						&create_or_error_if_exists);
+				is_coeie = cfg->get_uint64("force_create", &create_or_error_if_exists);
+			}
+
+			if (is_cim && is_coeie) {
+				throw internal::invalid_argument("Config contains both flags: \"create_if_missing\" and \"create_or_error_if_exists\"");
 			}
 
 			if (create_if_missing) {

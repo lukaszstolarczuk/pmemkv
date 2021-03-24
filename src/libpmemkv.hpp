@@ -1479,7 +1479,7 @@ inline status config::put_string(const std::string &key,
 }
 
 /**
- * Puts size to a config
+ * Puts size to a config, it's required if creating new database pool.
  *
  * @param[in] size of the database in bytes.
  *
@@ -1491,7 +1491,7 @@ inline status config::put_size(std::uint64_t size) noexcept
 }
 
 /**
- * Puts path to a config.
+ * Puts path to a config, to open or create a database pool.
  *
  * @param[in] path to a database file or to a poolset file (see **poolset**(5) for
  * details). Note that when using poolset file, size should be 0.
@@ -1515,9 +1515,8 @@ inline status config::put_force_create(bool value) noexcept
 }
 
 /**
- * Puts create_or_error_if_exists parameter to a config. This flag has lower priority than
- * **create_if_missing** (see config::put_create_if_missing), setting them both makes no
- * sense. It uses 'path' (as specified by e.g. config::put_path).
+ * Puts create_or_error_if_exists parameter to a config. This flag is mutually exclusive
+ * with **create_if_missing** (see config::put_create_if_missing).
  * Works only with engines supporting this flag and it means:
  * If true: pmemkv creates the pool, unless it exists - then it fails.
  * If false: pmemkv opens the pool, unless the path does not exist - then it fails.
