@@ -24,6 +24,9 @@ static void FailsToOpenExisting(std::string path, std::string engine, std::size_
 	ASSERT_STATUS(s, pmem::kv::status::INVALID_ARGUMENT);
 }
 
+
+XXX
+
 static void test(int argc, char *argv[])
 {
 	if (argc < 4)

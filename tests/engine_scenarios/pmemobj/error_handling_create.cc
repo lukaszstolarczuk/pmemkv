@@ -127,6 +127,35 @@ static void FailsToCreateInstanceWithPathAndOid(std::string path, std::string en
 	ASSERT_STATUS(s, pmem::kv::status::INVALID_ARGUMENT);
 }
 
+
+XXX
+
+static void FailsToOpenInstanceWithBothFlags(std::string path, std::string engine, size_t size,
+			      bool flags_value)
+{
+	/**
+	 * TEST: Pmemobj-based engines should use create_if_missing as priority, so it
+	 *should work well to open existing pool. If none set it should just open the
+	 *pool.
+	 */
+
+	pmem::kv::config config;
+	auto s = config.put_path(path);
+	ASSERT_STATUS(s, pmem::kv::status::OK);
+	s = config.put_size(size);
+	ASSERT_STATUS(s, pmem::kv::status::OK);
+	s = config.put_create_or_error_if_exists(flags_value);
+	ASSERT_STATUS(s, pmem::kv::status::OK);
+	s = config.put_create_if_missing(flags_value);
+	ASSERT_STATUS(s, pmem::kv::status::OK);
+
+	pmem::kv::db kv;
+	s = kv.open(engine, std::move(config));
+	ASSERT_STATUS(s, pmem::kv::status::OK);
+}
+
+
+
 static void FailsToCreateInstanceWithNoPathOrOid(std::string path, std::string engine,
 						 bool error_flag)
 {
@@ -152,7 +181,7 @@ static void FailsToCreateInstanceWithCornerCasePaths(std::string engine, bool er
 
 	for (auto &path : paths) {
 		pmem::kv::config config;
-		auto s = config.put_create_or_error_if_exists(true);
+		auto s = config.put_create_or_error_if_exists(error_flag);
 		ASSERT_STATUS(s, pmem::kv::status::OK);
 		s = config.put_create_if_missing(true);
 		ASSERT_STATUS(s, pmem::kv::status::OK);
