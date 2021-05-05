@@ -36,6 +36,24 @@ Installation of Key-Value Datastore for Persistent Memory
 	* [**perl**](https://www.perl.org/) - for whitespace checker script
 	* [**clang format**](https://clang.llvm.org/docs/ClangFormat.html) - to format and check coding style, version 9.0 is required
 
+Required packages (or their names) for some OSes may differ. Some examples or scripts in this
+repository may require additional dependencies, but should not interrupt the build.
+
+See our **[Dockerfiles](utils/docker/images)** (used e.g. on our CI
+systems) to get an idea what packages are required to build
+the entire pmemkv, with all tests and examples.
+
+### Proxy
+
+Configure proxy if necessary:
+
+```sh
+git config --global http.proxy <YOUR_PROXY>
+git config --global https.proxy <YOUR_PROXY>
+export HTTP_PROXY="<YOUR_PROXY>"
+export HTTPS_PROXY="<YOUR_PROXY>"
+```
+
 ### Building pmemkv and running tests
 
 ```sh
@@ -97,21 +115,8 @@ make test            # or 'ctest --output-on-failure'
 
 ## Installing on Fedora
 
-Install required packages (this list may be outdated, to see comprehensive list of packages
-used in our CI see a Fedora image in [utils directory](./utils/docker/images/)):
-
-```sh
-su -c 'dnf install autoconf automake cmake daxctl-devel gcc gcc-c++ \
-	libtool ndctl-devel numactl-devel rapidjson-devel tbb-devel'
-```
-
-Configure for proxy if necessary:
-
-```sh
-git config --global http.proxy <YOUR PROXY>
-export HTTP_PROXY="<YOUR PROXY>"
-export HTTPS_PROXY="<YOUR PROXY>"
-```
+Install required packages (see comprehensive list of packages used in our CI
+on a Fedora image in [utils directory](./utils/docker/images/)):
 
 Install latest PMDK:
 
@@ -153,21 +158,8 @@ Finally [build and install pmemkv from sources](#building-from-sources).
 
 ## Installing on Ubuntu
 
-Install required packages (this list may be outdated. To see comprehensive list of packages
-used in our CI see an Ubuntu image in [utils directory](./utils/docker/images/)):
-
-```sh
-sudo apt install autoconf automake build-essential cmake libdaxctl-dev \
-	libndctl-dev libnuma-dev libtbb-dev libtool rapidjson-dev
-```
-
-Configure for proxy if necessary:
-
-```sh
-git config --global http.proxy <YOUR PROXY>
-export HTTP_PROXY="<YOUR PROXY>"
-export HTTPS_PROXY="<YOUR PROXY>"
-```
+Install required packages (see comprehensive list of packages used in our CI
+on a Ubuntu image in [utils directory](./utils/docker/images/)):
 
 Install latest PMDK:
 
